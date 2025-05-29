@@ -25,7 +25,7 @@ pipeline {
             steps {
                 bat '''
                 cd frontend
-                npm ci 
+                npm i
                 npm test
                 '''
             }

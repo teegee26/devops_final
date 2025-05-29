@@ -4,7 +4,7 @@ services:
     build: ./backend
     ports:
       - 8081:8080
-    environmen:
+    environment:
      -  MONGODBATLAS_CLUSTER_CONNECTIONSTRING=mongodb+srv://timotiusgiovandi:89i09BcdjTWUaBsU@cluster0.mqtw9jg.mongodb.net
   frontend:
     build: ./frontend

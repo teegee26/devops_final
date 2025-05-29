@@ -23,15 +23,5 @@ pipeline{
         }  
       }
     }
-    stage('TEST'){
-      steps{
-        sh'''
-        # ls
-        # cd frontend-app
-        # npm ci
-        # npm run test
-        '''
-      }
-    }
   }
 }

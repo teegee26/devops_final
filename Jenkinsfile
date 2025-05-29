@@ -27,7 +27,7 @@ pipeline{
       steps{
         sh'''
         ls
-        cd frontend-app
+        # cd frontend-app
         # npm ci
         # npm run test
         '''

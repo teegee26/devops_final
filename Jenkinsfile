@@ -33,5 +33,11 @@ pipeline{
             }
         }
     }
+    stage('build'){
+      bat'''
+      docker-compose build
+      '''
+    }
+  
   }
 

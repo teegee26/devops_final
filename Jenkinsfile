@@ -24,12 +24,21 @@ pipeline{
       }
     }
     stage('test'){
-      steps{
-        sh'''
-        echo "test"
-        '''
-        echo('test')
-      }
+        stage('Test') {
+            agent{
+                docker{
+                    image 'node:22-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
+                cd frontend-app
+                npm ci 
+                npm test
+                '''
+            }
+        }
     }
   }
 }

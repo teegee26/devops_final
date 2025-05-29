@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    environment{
-        MONGO_DB_URL = credentials('MONGO_DB_URL')
-    }
+    // environment{
+    //     MONGO_DB_URL = credentials('MONGO_DB_URL')
+    // }
     stages {
         stage('checkout') {
             steps {
@@ -36,7 +36,7 @@ pipeline {
         stage('build run on local') {
             steps {
                 bat'''
-                set MONGODBATLAS_CLUSTER_CONNECTIONSTRING=%MONGO_DB_URL%
+                set MONGODBATLAS_CLUSTER_CONNECTIONSTRING=%credentials('MONGO_DB_URL')%
                 set VITE_BACKEND_URL=https://backend:8081
                 docker-compose up -d
                 '''

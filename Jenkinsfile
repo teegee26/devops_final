@@ -24,7 +24,7 @@ pipeline {
         stage('test') {
             steps {
                 bat '''
-                cd frontend-app
+                cd frontend
                 npm ci 
                 npm test
                 '''

@@ -36,6 +36,7 @@ pipeline {
         stage('build run on local') {
             steps {
                 bat'''
+                echo "%credentials('MONGO_DB_URL')%"
                 set MONGODBATLAS_CLUSTER_CONNECTIONSTRING=%credentials('MONGO_DB_URL')%
                 set VITE_BACKEND_URL=https://backend:8081
                 docker-compose up -d

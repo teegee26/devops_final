@@ -30,10 +30,10 @@ pipeline {
                 '''
             }
         }
-        stage('build') {
+        stage('build run on local') {
             steps {
                 bat'''
-                docker-compose build
+                docker-compose up -d
                 '''
             }
         }

@@ -9,14 +9,14 @@ pipeline {
                         $class: 'GitSCM',
                         branches: [[name: 'main']],
                         userRemoteConfigs: [[url: 'https://github.com/timgio26/customerDataPlatform_react.git']],
-                        extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'frontend-app']]
+                        extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'frontend']]
                     ])
                     // Checkout Backend Repository
                     checkout([
                         $class: 'GitSCM',
                         branches: [[name: 'main']],
                         userRemoteConfigs: [[url: 'https://github.com/timgio26/customerDataPlatform_mongoDb.git']],
-                        extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'backend-app']]
+                        extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'backend']]
                     ])
                 }
             }

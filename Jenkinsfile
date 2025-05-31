@@ -26,7 +26,7 @@ pipeline {
         }
         stage('test') {
             steps {
-                sh '''
+                bat '''
                 cd frontend
                 npm i
                 npm test
@@ -47,7 +47,7 @@ pipeline {
         success{
             echo 'open http://localhost:3000/'
             bat'''
-            echo {"id": %APP_VERSION%} > lastsuccessbuild.json
+            echo {"id": "%APP_VERSION%"} > lastsuccessbuild.json
             '''
         }
         failure{

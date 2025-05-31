@@ -1,16 +1,36 @@
-version: '3'
+version: '0.1'
 services:
-  backend:
-    build: ./backend
+  mongodb:
+    image: mongo
+    container_name: mongodb
     ports:
-      - 8081:8080
+      - "27017:27017"
     environment:
-     -  MONGODBATLAS_CLUSTER_CONNECTIONSTRING=mongodb+srv://timotiusgiovandi:89i09BcdjTWUaBsU@cluster0.mqtw9jg.mongodb.net
-  frontend:
-    build: ./frontend
-    ports:
-      - 3000:80
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  webapi:
+    image: my-dotnet-api
+    container_name: webapi
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     depends_on:
-      - backend
+      - mongodb
     environment:
-      - VITE_API_URL=http://localhost:8081
+      MONGO_CONNECTION_STRING: "mongodb://root:example@mongodb:27017"
+    ports:
+      - "8080:8080"
+  
+  cdpfrontend:
+    image: img-cdp-frontend
+    container_name: ctr-cdp-frontend
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    # environment:
+    #   VITE_API_URL: "http://localhost:8080"
+    depends_on:
+      - webapi
+    ports:
+      - "3000:80"

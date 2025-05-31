@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    // environment{
-    //     MONGO_DB_URL = credentials('MONGO_DB_URL')
-    // }
+    environment{
+        APP_VERSION = "1.0.${BUILD_ID}"
+    }
     stages {
         stage('checkout') {
             steps {
@@ -46,6 +46,7 @@ pipeline {
     post{
         success{
             echo 'open http://localhost:3000/'
+            echo "{'LAST_SUCCESS_BUILD':${APP_VERSION}}" > LAST_SUCCESS_BUILD.json
         }
         failure{
             echo 'rollback deployment'

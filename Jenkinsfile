@@ -46,7 +46,9 @@ pipeline {
     post{
         success{
             echo 'open http://localhost:3000/'
-            echo '{"id": "1231231"}' > lastsuccessbuild.json
+            bat'''
+            echo {id: $APP_VERSION} > lastsuccessbuild.json
+            '''
         }
         failure{
             echo 'rollback deployment'

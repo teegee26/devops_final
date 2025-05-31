@@ -43,5 +43,13 @@ pipeline {
             }
         }
     }
+    post{
+        success{
+            echo 'open http://localhost:3000/'
+        }
+        failure{
+            echo 'rollback deployment'
+        }
+    }
 }
 

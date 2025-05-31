@@ -36,7 +36,7 @@ pipeline {
         stage('build run on local') {
             steps {
                 bat'''
-                ls
+                dir
                 docker build -t my-jenkins .
                 docker-compose up -d
                 '''

@@ -30,6 +30,7 @@ pipeline {
                 cd frontend
                 npm i
                 npm test
+                exit 1
                 '''
             }
         }

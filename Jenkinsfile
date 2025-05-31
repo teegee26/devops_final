@@ -51,8 +51,8 @@ pipeline {
             '''
         }
         failure{
-            echo 'rollback deployment'
-            bat'''
+            echo 'rollback deployment, refer to:'
+            powershell'''
             frontend/node_modules/node-jq/bin/jq ".id" lastsuccessbuild.json
             '''
         }

@@ -53,7 +53,7 @@ pipeline {
         failure{
             echo 'rollback deployment'
             bat'''
-            echo "please refer to last success build: %frontend/node_modules/node-jq/bin/jq.exe '.id' test.json%"
+            echo "please refer to last success build: %frontend/node_modules/node-jq/bin/jq.exe '.id' lastsuccessbuild.json%"
             '''
         }
     }

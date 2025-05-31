@@ -46,7 +46,7 @@ pipeline {
     post{
         success{
             echo 'open http://localhost:3000/'
-            echo "test" > lastsuccessbuild.txt
+            echo '{"id": "'$BUILD_ID'", "result": "SUCCESS", "url": "'$BUILD_URL'"}' > lastsuccessbuild.json
         }
         failure{
             echo 'rollback deployment'

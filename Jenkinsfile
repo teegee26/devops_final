@@ -26,11 +26,10 @@ pipeline {
         }
         stage('test') {
             steps {
-                bat '''
+                sh '''
                 cd frontend
                 npm i
                 npm test
-                exit 1
                 '''
             }
         }

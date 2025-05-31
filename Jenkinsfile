@@ -46,7 +46,7 @@ pipeline {
     post{
         success{
             echo 'open http://localhost:3000/'
-            echo "{'LAST_SUCCESS_BUILD':${APP_VERSION}}" > LAST_SUCCESS_BUILD.json
+            echo "test" > lastsuccessbuild.txt
         }
         failure{
             echo 'rollback deployment'

@@ -49,7 +49,7 @@ pipeline {
             bat'''
             echo last success build : %APP_VERSION% > lastsuccessbuild.txt
             '''
-            mail bcc: '', body: 'pipeline running successfuly', cc: '', from: '', replyTo: '', subject: 'jenkins pipeline result', to: 't.giovandi.523@studms.ug.edu.pl'
+            mail bcc: '', body: "pipeline running successfuly ${APP_VERSION }", cc: '', from: '', replyTo: '', subject: 'jenkins pipeline result', to: 't.giovandi.523@studms.ug.edu.pl'
         }
         failure{
             bat'''

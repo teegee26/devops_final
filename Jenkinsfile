@@ -35,7 +35,7 @@ pipeline {
         }
         stage('build run on local') {
             steps {
-                sh'''
+                bat'''
                 dir
                 docker build -t my-jenkins .
                 docker-compose up -d
@@ -49,6 +49,7 @@ pipeline {
             bat'''
             echo last success build : %APP_VERSION% > lastsuccessbuild.txt
             '''
+            mail bcc: '', body: 'pipeline running successfuly', cc: '', from: '', replyTo: '', subject: 'jenkins pipeline result', to: 't.giovandi.523@studms.ug.edu.pl'
         }
         failure{
             bat'''

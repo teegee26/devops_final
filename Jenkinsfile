@@ -47,13 +47,13 @@ pipeline {
         success{
             echo 'open http://localhost:3000/'
             bat'''
-            echo {"id": "%APP_VERSION%"} > lastsuccessbuild.json
+            echo last success build : %APP_VERSION% > lastsuccessbuild.txt
             '''
         }
         failure{
-            echo 'rollback deployment, refer to:'
-            powershell'''
-            frontend/node_modules/node-jq/bin/jq ".id" lastsuccessbuild.json
+            bat'''
+            echo fail pipeline please refer to:
+            more lastsuccessbuild.txt
             '''
         }
     }

@@ -52,17 +52,17 @@ pipeline {
               }
             }
 
-        // stage('SonarQube analysis - Backend') {
-        //     steps {
-        //         withSonarQubeEnv('mysonarcube') {
-        //             bat '''
-        //             SonarScanner.MSBuild.exe begin /k:"devops_final_fe"
-        //             msbuild backend/MyProject.sln /t:Rebuild
-        //             SonarScanner.MSBuild.exe end
-        //             '''
-        //         }
-        //     }
-        // }
+        stage('SonarQube analysis - Backend') {
+            steps {
+                withSonarQubeEnv('mysonarcube') {
+                    bat '''
+                    SonarScanner.MSBuild.exe begin /k:"devops_final"
+                    msbuild backend/MyProject.sln /t:Rebuild
+                    SonarScanner.MSBuild.exe end
+                    '''
+                }
+            }
+        }
 
         stage('QA approval'){
             steps {

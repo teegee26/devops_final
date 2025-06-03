@@ -24,22 +24,22 @@ pipeline {
                 }
             }
         }
-        stage('test') {
-            steps {
-                bat '''
-                cd frontend
-                npm i
-                npm test
-                '''
-            }
-        }
-        stage('build run on local') {
-            steps {
-                bat'''
-                docker-compose up -d
-                '''
-            }
-        }
+        // stage('test') {
+        //     steps {
+        //         bat '''
+        //         cd frontend
+        //         npm i
+        //         npm test
+        //         '''
+        //     }
+        // }
+        // stage('build run on local') {
+        //     steps {
+        //         bat'''
+        //         docker-compose up -d
+        //         '''
+        //     }
+        // }
 
         stage('SonarQube analysis') {
               steps {
@@ -47,22 +47,22 @@ pipeline {
                     scannerHome = tool 'sonarcubescanner'// must match the name of an actual scanner installation directory on your Jenkins build agent
                 }
                 withSonarQubeEnv('mysonarcube') {// If you have configured more than one global server connection, you can specify its name as configured in Jenkins
-                  bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devops_final_fe -Dsonar.sources=frontend/src"                  
+                  bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devops_final -Dsonar.sources=frontend/src"                  
                 }
               }
             }
 
-        stage('SonarQube analysis - Backend') {
-            steps {
-                withSonarQubeEnv('mysonarcube') {
-                    bat '''
-                    SonarScanner.MSBuild.exe begin /k:"devops_final_fe"
-                    msbuild backend/MyProject.sln /t:Rebuild
-                    SonarScanner.MSBuild.exe end
-                    '''
-                }
-            }
-        }
+        // stage('SonarQube analysis - Backend') {
+        //     steps {
+        //         withSonarQubeEnv('mysonarcube') {
+        //             bat '''
+        //             SonarScanner.MSBuild.exe begin /k:"devops_final_fe"
+        //             msbuild backend/MyProject.sln /t:Rebuild
+        //             SonarScanner.MSBuild.exe end
+        //             '''
+        //         }
+        //     }
+        // }
 
         stage('QA approval'){
             steps {

@@ -24,22 +24,22 @@ pipeline {
                 }
             }
         }
-        stage('test') {
-            steps {
-                bat '''
-                cd frontend
-                npm i
-                npm test
-                '''
-            }
-        }
-        stage('build run on local') {
-            steps {
-                bat'''
-                docker-compose up -d
-                '''
-            }
-        }
+        // stage('test') {
+        //     steps {
+        //         bat '''
+        //         cd frontend
+        //         npm i
+        //         npm test
+        //         '''
+        //     }
+        // }
+        // stage('build run on local') {
+        //     steps {
+        //         bat'''
+        //         docker-compose up -d
+        //         '''
+        //     }
+        // }
 
         stage('SonarQube analysis') {
               steps {

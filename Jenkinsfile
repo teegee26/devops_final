@@ -24,22 +24,22 @@ pipeline {
                 }
             }
         }
-        // stage('test') {
-        //     steps {
-        //         bat '''
-        //         cd frontend
-        //         npm i
-        //         npm test
-        //         '''
-        //     }
-        // }
-        // stage('build run on local') {
-        //     steps {
-        //         bat'''
-        //         docker-compose up -d
-        //         '''
-        //     }
-        // }
+        stage('test') {
+            steps {
+                bat '''
+                cd frontend
+                npm i
+                npm test
+                '''
+            }
+        }
+        stage('build run on local') {
+            steps {
+                bat'''
+                docker-compose up -d
+                '''
+            }
+        }
 
         stage('SonarQube analysis') {
               steps {
@@ -52,17 +52,6 @@ pipeline {
               }
             }
 
-        stage('SonarQube analysis - Backend') {
-            steps {
-                withSonarQubeEnv('mysonarcube') {
-                    bat '''
-                    SonarScanner.MSBuild.exe begin /k:"devops_final"
-                    msbuild backend/MyProject.sln /t:Rebuild
-                    SonarScanner.MSBuild.exe end
-                    '''
-                }
-            }
-        }
 
         stage('QA approval'){
             steps {
@@ -73,6 +62,9 @@ pipeline {
         stage('deployment to production'){
             steps {
                 echo('deploy to production')
+                bat'''
+                az account show 
+                '''
             }
         }
     }

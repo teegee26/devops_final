@@ -42,10 +42,20 @@ pipeline {
                 '''
             }
         }
+        stage('QA approval'){
+            steps {
+                echo 'open http://localhost:3000/'
+                input message: 'Do you want to continue to deployment?', ok: 'Yes, deploy'
+            }
+        }
+        stage('deployment to production'){
+            steps {
+                echo('deploy to production')
+            }
+        }
     }
     post{
         success{
-            echo 'open http://localhost:3000/'
             bat'''
             echo last success build : %APP_VERSION% > lastsuccessbuild.txt
             '''

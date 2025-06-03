@@ -44,7 +44,7 @@ pipeline {
         stage('SonarQube analysis') {
               steps {
                 script {
-                    scannerHome = tool 'mysonarcube'// must match the name of an actual scanner installation directory on your Jenkins build agent
+                    scannerHome = tool 'sonarcubescanner'// must match the name of an actual scanner installation directory on your Jenkins build agent
                 }
                 withSonarQubeEnv('mysonarcube') {// If you have configured more than one global server connection, you can specify its name as configured in Jenkins
                   bat "${scannerHome}/bin/sonar-scanner"

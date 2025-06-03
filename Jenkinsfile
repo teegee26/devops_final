@@ -36,9 +36,14 @@ pipeline {
         stage('build run on local') {
             steps {
                 bat'''
-                dir
-                docker build -t my-jenkins .
                 docker-compose up -d
+                '''
+            }
+        }
+        stage('run sonarcube analysis') {
+            steps {
+                bat'''
+                echo sonar 
                 '''
             }
         }

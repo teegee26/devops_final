@@ -58,6 +58,22 @@ pipeline {
                 input message: 'Do you want to continue to deployment?', ok: 'Yes, deploy'
             }
         }
+
+        stage('Deploy with Ansible in WSL') {
+            steps {
+                script {
+                    def ansibleInstalled = bat(script: "wsl which ansible-playbook", returnStatus: true) == 0
+                    if (!ansibleInstalled) {
+                        echo "Ansible is not installed inside WSL. Skipping deployment."
+                    } else if (!fileExists('inventory.ini') || !fileExists('playbook.yml')) {
+                        echo "Required Ansible files (inventory.ini or playbook.yml) missing. Skipping deployment."
+                    } else {
+                        bat "wsl ansible-playbook -i inventory.ini playbook.yml"
+                    }
+                }
+            }
+        }
+
         stage('deployment to production'){
             steps {
                 echo('deploy to production')

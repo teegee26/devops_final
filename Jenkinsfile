@@ -62,7 +62,7 @@ pipeline {
         stage('Deploy with Ansible in WSL') {
             steps {
                 script {
-                    def ansibleInstalled = bat(script: "wsl which ansible-playbook", returnStatus: true) == 0
+                    def ansibleInstalled = bat(script: "wsl -d Ubuntu ansible-playbook -i inventory.ini playbook.yml", returnStatus: true) == 0
                     if (!ansibleInstalled) {
                         echo "Ansible is not installed inside WSL. Skipping deployment."
                     } else if (!fileExists('inventory.ini') || !fileExists('playbook.yml')) {

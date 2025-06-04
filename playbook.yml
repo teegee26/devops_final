@@ -1,12 +1,42 @@
-- name: Deploy App
-  hosts: servers
+---
+- name: Deploy Customer Data Platform
+  hosts: web_servers
   become: true
   tasks:
-    - name: Install Docker
+    - name: Update system packages
       apt:
-        name: docker.io
+        update_cache: yes
+    
+    - name: Install Docker & Docker Compose
+      apt:
+        name:
+          - docker.io
+          - docker-compose
         state: present
-    - name: Run Docker Compose
+
+    - name: Start Docker Service
+      service:
+        name: docker
+        state: started
+
+    - name: Clone Backend Repository (.NET)
+      git:
+        repo: "https://github.com/timgio26/customerDataPlatform_mongoDb.git"
+        dest: "/home/ubuntu/backend"
+        version: "main"
+
+    - name: Clone Frontend Repository (React)
+      git:
+        repo: "https://github.com/timgio26/customerDataPlatform_react.git"
+        dest: "/home/ubuntu/frontend"
+        version: "main"
+
+    - name: Copy Docker Compose file
+      copy:
+        src: docker-compose.yml
+        dest: /home/ubuntu/docker-compose.yml
+
+    - name: Start Application with Docker Compose
       command:
         cmd: docker-compose up -d
-        chdir: /home/app/
+        chdir: /home/ubuntu/

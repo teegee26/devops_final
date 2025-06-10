@@ -35,9 +35,11 @@ pipeline {
         }
         stage('build run on local') {
             steps {
+                
                 bat'''
                 docker-compose up -d
                 '''
+                sleep 15
             }
         }
 

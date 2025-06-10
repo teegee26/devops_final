@@ -39,7 +39,7 @@ pipeline {
                 bat'''
                 docker-compose up -d
                 '''
-                sleep 15
+                sleep 30
             }
         }
 
